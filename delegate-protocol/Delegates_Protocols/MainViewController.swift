@@ -24,6 +24,20 @@ class MainViewController: UIViewController {
     @objc func goToSwitchView() {
         let controller = storyboard?.instantiateViewController(identifier: "SwitchViewController") as! SwitchViewController
         controller.switchIsOn = lightOn
+        controller.delegate = self
         present(controller, animated: true, completion: nil)
+    }
+}
+
+extension MainViewController: BulbDelegate {
+    func toggleBuld(_ state: Bool) {
+        lightOn = state
+        if state {
+            self.view.backgroundColor = .orange
+            bulbImageView.image = UIImage(named: "bulbOn")
+        } else {
+            self.view.backgroundColor = .darkGray
+            bulbImageView.image = UIImage(named: "bulbOff")
+        }
     }
 }

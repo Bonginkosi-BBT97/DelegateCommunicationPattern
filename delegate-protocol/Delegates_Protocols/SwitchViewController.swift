@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol BulbDelegate {
+
+    func toggleBuld(_ state: Bool)
+
+}
+
 class SwitchViewController: UIViewController {
 
     @IBOutlet weak var switchView: UISwitch!
     var switchIsOn: Bool!
+    var delegate: BulbDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +27,7 @@ class SwitchViewController: UIViewController {
     }
     
     @IBAction func switchToggled(_ sender: UISwitch) {
+        delegate.toggleBuld(sender.isOn)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.dismiss(animated: true, completion: nil)
         }
